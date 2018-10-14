@@ -1,0 +1,5 @@
+﻿Application.obj : error LNK2019: unresolved external symbol "struct QuadMesh __cdecl NewQuadMesh(int)" (?NewQuadMesh@@YA?AUQuadMesh@@H@Z) referenced in function "void __cdecl initOpenGL(int,int)" (?initOpenGL@@YAXHH@Z)
+Application.obj : error LNK2019: unresolved external symbol "void __cdecl SetMaterialQM(struct QuadMesh *,struct Vector3D,struct Vector3D,struct Vector3D,double)" (?SetMaterialQM@@YAXPAUQuadMesh@@UVector3D@@11N@Z) referenced in function "void __cdecl initOpenGL(int,int)" (?initOpenGL@@YAXHH@Z)
+Application.obj : error LNK2019: unresolved external symbol "bool __cdecl InitMeshQM(struct QuadMesh *,int,struct Vector3D,double,double,struct Vector3D,struct Vector3D)" (?InitMeshQM@@YA_NPAUQuadMesh@@HUVector3D@@NN11@Z) referenced in function "void __cdecl initOpenGL(int,int)" (?initOpenGL@@YAXHH@Z)
+Application.obj : error LNK2019: unresolved external symbol "void __cdecl DrawMeshQM(struct QuadMesh *,int)" (?DrawMeshQM@@YAXPAUQuadMesh@@H@Z) referenced in function "void __cdecl display(void)" (?display@@YAXXZ)
+C:\Users\waail\OneDrive\Desktop\OpenGL\Debug\OpenGL.exe : fatal error LNK1120: 4 unresolved externals

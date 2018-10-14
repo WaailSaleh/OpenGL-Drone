@@ -1,0 +1,205 @@
+/*******************************************************************
+3D Geometric Transformations: Spinning teapot
+left click on the screen to start the animation
+********************************************************************/
+
+#include <windows.h>   
+#include <gl/gl.h>
+#include <gl/glu.h>
+#include <gl/glut.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+
+
+
+#define PI 3.141592654
+
+void init(int w, int h);
+void display(void);
+void reshape(int w, int h);
+void mouse(int button, int state, int x, int y);
+void keyboard(unsigned char key, int x, int y);
+void spinDisplay(void);
+
+
+
+// These variables are used to control the rotation of the teapot
+// spin is the angle that we rotate the teapot around an axis through
+// its center (i.e. the z-axis since the teapot is initially placed
+// 
+static GLfloat spin = 1;
+static GLfloat theta = 0.0;
+
+GLfloat mat_ambient[] = { 0.4, 0.2, 0.0, 1.0 };
+GLfloat mat_specular[] = { 0.4, 0.4, 0.0, 1.0 };
+GLfloat mat_diffuse[] = { 0.9, 0.5, 0.0, 1.0 };
+GLfloat mat_shininess[] = { 0.0 };
+GLfloat light_position0[] = { -5.0,5.0,5.0,1.0 };
+GLfloat light_position1[] = { 5.0,5.0,5.0,1.0 };
+GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
+GLfloat light_specular[] = { 0.0, 0.0, 0.0, 1.0 };
+GLfloat model_ambient[] = { 0.0, 0.0, 0.0, 1.0 };
+
+
+
+int main1(int argc, char **argv)
+{
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+	glutInitWindowSize(500, 500);
+	glutInitWindowPosition(100, 100);
+	glutCreateWindow(argv[0]);
+	init(500, 500);
+	glutDisplayFunc(display);
+	glutReshapeFunc(reshape);
+	glutMouseFunc(mouse);
+	glutMainLoop();
+	return 0;
+}
+
+
+
+// Initialize the system */
+void init(int w, int h)
+{
+	glClearColor(0.0, 0.0, 0.0, 0.0);
+
+	// Set up the projection
+	glViewport(0, 0, (GLsizei)w, (GLsizei)h);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(60.0, 1.0, 0.1, 20.0);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	// Setup the material and lights used for our teapot
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat_ambient);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat_diffuse);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mat_shininess);
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, model_ambient);
+
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
+	glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+	glLightfv(GL_LIGHT0, GL_POSITION, light_position0);
+	glLightfv(GL_LIGHT1, GL_POSITION, light_position1);
+	glShadeModel(GL_SMOOTH);
+
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHT1);
+
+	glEnable(GL_DEPTH_TEST);
+
+}
+
+// There are two display functions - one is commented out. Try
+// (and play with ) both of them
+
+
+
+void display(void)
+{
+glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+glLoadIdentity();
+
+// Set up the Viewing Transformation (V matrix = R T)
+// this is constructed by opengl - upcoming lecture
+gluLookAt(0.0,0.0,10.0,0.0,0.0,0.0,0.0,1.0,0.0);
+
+
+// Set up the modeling transformation (M matrix)
+// The current transformation matrix CTM = VM
+// where M = R_z(theta)T(3.0,0.0,0.0)R_z(spin)
+// R_z(spin) rotates the teapot around an axis (the z axis) going through
+// its center. The teapot is initially placed with its center at the origin
+// when glutSolidTeapot is called)
+// T(3.0,0.0,0.0) translates the teapot 3 units to the right, along the x-axis
+// R_z(theta) rotates the teapot (which has now been rotated around its center
+// axis and translated to the right by 3) around the z-axis. This means it will
+// rotate in a circle (with radius 3.0) - see the spinDisplay animation function
+// I suggest you try commenting out each of the following lines, 1 at a time, to see
+// more clearly what each one does
+//glRotatef(theta,0.0,0.0,1.0); // R_z(theata)
+//glTranslatef(3.0,0.0,0.0);    // T
+glRotatef(spin,0.0,1.0,0.0);  // R_z(spin)
+
+// Each point p on the teapot is multiplied by the CTM
+// p' = VMp
+//    = V * R_z(theta) * T(3.0,0,0) * R_z(spin) * p
+
+GLUquadricObj *quadratic;
+quadratic = gluNewQuadric();
+gluCylinder(quadratic, 0.5f, 0.5f, 9, 32, 32);
+
+glutSwapBuffers();
+}
+
+
+
+// Try this one (comment out the previous display function and unccomment this one)
+// See what amazing things we can create with just a few lines of code!
+
+
+void drawPropeller(float pHeight) {
+	glClearColor(1.0f, 0.0f, 0.0f, 1.0f); //clear
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glLoadIdentity();
+	GLUquadricObj *quadratic;
+	quadratic = gluNewQuadric();
+	gluCylinder(quadratic, 0.1f, 0.1f, pHeight, 32, 32);
+
+	glFlush();
+}
+// Called at initialization and whenever user resizes the window */
+void reshape(int w, int h)
+{
+	glViewport(0, 0, (GLsizei)w, (GLsizei)h);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(60.0, 1.0, 0.1, 20.0);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+}
+
+void mouse(int button, int state, int x, int y)
+{
+	switch (button)
+	{
+	case GLUT_LEFT_BUTTON:
+		if (state == GLUT_DOWN)
+			glutIdleFunc(spinDisplay);
+		break;
+	case GLUT_MIDDLE_BUTTON:
+		if (state == GLUT_DOWN)
+			glutIdleFunc(NULL);
+		break;
+	default:
+		break;
+	}
+}
+
+
+void spinDisplay(void)
+{
+	spin += 1;
+	if (spin > 360.0)
+		spin -= 360.0;
+
+	theta += 0.2;
+	if (theta > 360.0)
+		theta -= 360.0;
+
+	glutPostRedisplay();
+}
+
+
+
+
+
+
