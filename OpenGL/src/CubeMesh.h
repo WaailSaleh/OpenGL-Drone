@@ -1,6 +1,6 @@
 #include <stdbool.h>
 #include "Vector3D.h"
-
+#include <GL/glut.h>
 typedef struct CubeMesh
 {
 	Vector3D center;
@@ -22,5 +22,10 @@ typedef struct CubeMesh
     float highlightMat_specular[4];
     float highlightMat_diffuse[4];
 	float highlightMat_shininess[1];
+	
+	GLfloat height;
+	int   floors;
+	GLfloat position[3];
+	
 
 } CubeMesh;

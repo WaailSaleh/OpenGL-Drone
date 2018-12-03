@@ -1,8 +1,8 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (OpenGL-LAPTOP-UPHQS9IB.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   Application.c
-c:\users\waail\onedrive\desktop\opengl\opengl\src\application.c(174): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'GLdouble'
-c:\users\waail\onedrive\desktop\opengl\opengl\src\application.c(174): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'GLdouble'
-c:\users\waail\onedrive\desktop\opengl\opengl\src\application.c(174): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 3 has type 'double'
-c:\users\waail\onedrive\desktop\opengl\opengl\src\application.c(174): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 4 has type 'double'
-c:\users\waail\onedrive\desktop\opengl\opengl\src\application.c(303): warning C4244: 'function': conversion from 'GLfloat' to 'int', possible loss of data
+c:\users\waail\onedrive\desktop\opengl\opengl\src\building.c(36): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+c:\users\waail\onedrive\desktop\opengl\opengl\src\building.c(46): warning C4244: '=': conversion from 'GLfloat' to 'int', possible loss of data
+c:\users\waail\onedrive\desktop\opengl\opengl\src\application.c(176): warning C4244: 'function': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\waail\onedrive\desktop\opengl\opengl\src\application.c(196): warning C4244: 'function': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\waail\onedrive\desktop\opengl\opengl\src\application.c(209): warning C4305: 'function': truncation from 'double' to 'GLfloat'
   OpenGL.vcxproj -> C:\Users\waail\OneDrive\Desktop\OpenGL\Debug\OpenGL.exe

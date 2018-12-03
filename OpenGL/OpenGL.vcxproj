@@ -126,14 +126,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.c" />
-    <ClCompile Include="src\CubeMesh.c" />
+    <ClCompile Include="src\CubeMesh.cpp" />
     <ClCompile Include="src\QuadMesh.c" />
     <ClCompile Include="src\Source.txt" />
     <ClCompile Include="src\Vector3D.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\CubeMesh.h" />
-    <ClInclude Include="src\Propeller.h" />
+    <ClInclude Include="src\Building.c" />
     <ClInclude Include="src\QuadMesh.h" />
     <ClInclude Include="src\Vector3D.h" />
   </ItemGroup>
